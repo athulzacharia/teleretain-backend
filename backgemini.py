@@ -47,7 +47,16 @@ def create_vector_store(text_chunks):
     embeddings = embed_model.encode(text_chunks, convert_to_numpy=True)
     d = embeddings.shape[1]
     index = faiss.IndexIDMap(faiss.IndexFlatL2(d))
-    ids = np.arange(len(embeddings))  # Create unique IDs for each vector
+
+    # Save index to disk
+    faiss.write_index(index, "faiss_index.bin")
+
+    def load_faiss_index():
+    return faiss.read_index("faiss_index.bin")
+
+    # Load index from disk
+    index = load_faiss_index()
+
     index.add_with_ids(embeddings, ids)
     return index, embeddings, text_chunks
 
