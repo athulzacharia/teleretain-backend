@@ -52,7 +52,7 @@ def create_vector_store(text_chunks):
     faiss.write_index(index, "faiss_index.bin")
 
     def load_faiss_index():
-    return faiss.read_index("faiss_index.bin")
+        return faiss.read_index("faiss_index.bin")
 
     # Load index from disk
     index = load_faiss_index()
