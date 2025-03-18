@@ -18,7 +18,23 @@ embed_model = SentenceTransformer("all-MiniLM-L6-v2")
 chat_history = []
 
 # Use relative path for PDF
-PDF_PATH = "temp.pdf"  # The PDF should be in the same folder as this file
+import requests
+
+PDF_URL = "https://raw.githubusercontent.com/athulzacharia/teleretain-backend/main/temp.pdf"
+PDF_PATH = "temp.pdf"
+
+def download_pdf(url, save_path):
+    response = requests.get(url)
+    if response.status_code == 200:
+        with open(save_path, "wb") as f:
+            f.write(response.content)
+        print("PDF downloaded successfully.")
+    else:
+        print("Failed to download PDF:", response.status_code)
+
+# Download PDF before processing
+download_pdf(PDF_URL, PDF_PATH)
+
 
 # Function to extract text from PDF
 def extract_text_from_pdf(pdf_path):
