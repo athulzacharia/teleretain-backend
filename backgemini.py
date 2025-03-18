@@ -68,7 +68,7 @@ def create_vector_store(text_chunks):
 
 # Load and process the PDF at startup
 text = extract_text_from_pdf(PDF_PATH)
-text_chunks = [text[i:i+500] for i in range(0, len(text), 500)]
+text_chunks = [text[i:i+1000] for i in range(0, len(text), 1000)]  # Increase chunk size
 index, embeddings, chunks = create_vector_store(text_chunks)
 
 # Chatbot API
