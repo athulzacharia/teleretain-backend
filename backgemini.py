@@ -7,8 +7,9 @@ import numpy as np
 import google.generativeai as genai
 import os  # Add this import
 
+from flask_cors import CORS
 app = Flask(__name__)
-CORS(app)
+CORS(app, origins=["https://athulzacharia.github.io", "http://localhost:3000"])
 
 # Use environment variable for API key
 genai.configure(api_key=os.environ.get("GEMINI_API_KEY", "AIzaSyB4WZudVc6NS00M_y9z4SuK415mLlADbNw"))
