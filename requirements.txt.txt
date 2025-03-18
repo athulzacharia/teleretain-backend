@@ -1,0 +1,8 @@
+flask
+flask-cors
+pymupdf
+sentence-transformers
+faiss-cpu
+numpy
+google-generativeai
+gunicorn
