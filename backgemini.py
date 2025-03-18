@@ -46,7 +46,7 @@ def extract_text_from_pdf(pdf_path):
 def create_vector_store(text_chunks):
     embeddings = embed_model.encode(text_chunks, convert_to_numpy=True)
     d = embeddings.shape[1]
-    index = faiss.IndexFlatL2(d)
+    index = faiss.IndexIDMap(faiss.IndexFlatL2(d))
     index.add(embeddings)
     return index, embeddings, text_chunks
 
