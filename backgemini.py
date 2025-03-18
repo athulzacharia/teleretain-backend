@@ -47,7 +47,8 @@ def create_vector_store(text_chunks):
     embeddings = embed_model.encode(text_chunks, convert_to_numpy=True)
     d = embeddings.shape[1]
     index = faiss.IndexIDMap(faiss.IndexFlatL2(d))
-    index.add(embeddings)
+    ids = np.arange(len(embeddings))  # Create unique IDs for each vector
+    index.add_with_ids(embeddings, ids)
     return index, embeddings, text_chunks
 
 # Load and process the PDF at startup
